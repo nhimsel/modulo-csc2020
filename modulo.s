@@ -9,8 +9,7 @@ main:                          # our main 'class'
     jal sizeOrder              # call size order
     jal modulus                # call modulus
     li $v0, 1                  # load syscall equivalent to printf("%d", num)
-    move $a0, $t0              # move result to $a0 for printing
-    syscall                    # execute syscall
+    syscall                    # execute syscall (answer is already in $a0 for printing)
     li $v0, 10                 # load syscall for exit
     syscall                    # execute syscall
 
@@ -24,11 +23,9 @@ return:
     jr $ra                     # return
 
 modulus:                       # find $a0 % $a1. $a0 should be larger
-    move $t0, $a0              # copy $a0 to $t0 for the result
-loop:
-    slt $t1, $t0, $a1          # check if $t0 < $a1
+    slt $t1, $a0, $a1          # check if $t0 < $a1
     bne $t1, $zero, end        # if $t0 < $a1, we are done
-    sub $t0, $t0, $a1          # subtract $a1 from $t0
-    j loop                     # repeat the loop
+    sub $a0, $a0, $a1          # subtract $a1 from $t0
+    j modulus                  # repeat the loop
 end:
     jr $ra                     # return
