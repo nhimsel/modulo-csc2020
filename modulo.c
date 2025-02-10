@@ -9,9 +9,9 @@ int main()
     int b=1;
 
     //get user input
-    printf("%s", "Enter the value:");
+    printf("%s", "Enter dividend:");
     scanf("%d", &a);
-    printf("%s", "Mod by:");
+    printf("%s", "Enter divisor:");
     scanf("%d", &b);
 
     //printf("%d\n", a%b);
@@ -21,36 +21,21 @@ int main()
     return 0;
 }
 
-int modulo(int n, int mod)
+int modulo(int a, int b)
 {
-    //should always return the same result as %
+    int big = a;
+    int small = b;
 
-    //make n positive for the operations
-    bool wasNeg=false;
-    if (n<0) 
+    if (b>a) //swap the values if b is larger
     {
-        n*=-1;
-        wasNeg=true;
+        big = a;
+        small = b;
     }
 
-    //make mod positive for the operations
-    if (mod<0)
+    while (big>=small)
     {
-        mod*=-1;
+        big-=small;
     }
 
-    //subtract mod from n until the result would be negative
-    while (n>=mod)
-    {
-        n-=mod;
-    }
-
-    //if n was negative, make the remainder negative
-    if (wasNeg)
-    {
-        n*=-1;
-    }
-
-    //n is the remainder
-    return n;
+    return big;
 }
