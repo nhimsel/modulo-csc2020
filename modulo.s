@@ -1,3 +1,4 @@
+# written and tested with mars-mips
 .data                                   # declare where we're gonna place data
 str1:   .asciiz     "Enter dividend: "  # set str1
 str2:   .asciiz     "Enter divisor: "   # set str2
